@@ -24,8 +24,8 @@ public class virtualKey
 		}
 		else if(option.equals("3"))
 		{
-			//place holder
-			System.out.println("Selected option 3");
+			System.out.println("Closing Application");
+			System.exit(0);
 		}
 		else
 		{
