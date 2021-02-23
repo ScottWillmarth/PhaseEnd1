@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class virtualKey 
 {
+	@SuppressWarnings("resource")
 	public static void mainMenu()
 	{
 		Scanner sc = new Scanner(System.in);
@@ -11,21 +12,25 @@ public class virtualKey
 		System.out.println("2. Edit files");
 		System.out.println("3. Close Application");
 		String  option =  sc.next();
-		if(option == "1")
+		if(option.equals("1"))
 		{
+			//place holder
 			System.out.println("Selected option 1");
 		}
-		else if(option == "2")
+		else if(option.equals("2"))
 		{
-			
+			//place holder
+			System.out.println("Selected option 2");
 		}
-		else if(option == "3")
+		else if(option.equals("3"))
 		{
-			
+			//place holder
+			System.out.println("Selected option 3");
 		}
 		else
 		{
-			
+			System.out.println(option + " is an invalid input. Try again. \n");
+			mainMenu();
 		}
 		
 	}
