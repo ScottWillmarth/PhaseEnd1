@@ -1,9 +1,109 @@
+import java.util.*; 
 import java.util.Scanner;
+import java.io.File;
 
 public class virtualKey 
 {
 	static Scanner sc = new Scanner(System.in);
 	static String  option;
+	
+	public static void printFiles(String[] files)
+	{
+		for (String file : files) 
+	    {
+	        System.out.println(file);
+	    }
+		System.out.println(" ");
+		mainMenu();
+	}
+	
+	static void merge(String[] files, int left, int middle, int right)
+    {
+        int n1 = middle - left + 1;
+        int n2 = right - middle;
+ 
+        String L[] = new String[n1];
+        String R[] = new String[n2];
+
+        for (int i = 0; i < n1; ++i)
+        {
+        	L[i] = files[left + i];
+        }
+            
+        for (int j = 0; j < n2; ++j)
+        {
+        	R[j] = files[middle + 1 + j];
+        }
+            
+        int i = 0;
+        int j = 0;
+        int k = left;
+        
+        while(i < n1 && j < n2) 
+        {
+            if(L[i].compareTo(R[j]) < 0) 
+            {
+                files[k] = L[i];
+                i++;
+            }
+            else 
+            {
+                files[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+ 
+      //Replacing elements of L[] into the files
+        while (i < n1) 
+        {
+        	files[k] = L[i];
+            i++;
+            k++;
+        }
+ 
+        //Replacing elements of R[] into the files
+        while (j < n2) 
+        {
+        	files[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+	
+	static void sort(String[] files, int left, int right)
+    {
+        if(left < right) 
+        {
+            int middle = left + (right - left) / 2;
+ 
+            //Divide array list
+            sort(files, left, middle);
+            sort(files, middle + 1, right);
+
+            merge(files, left, middle, right);
+        }
+        printFiles(files);
+    }
+	
+	//Uses Merge sort
+	public static void sortFiles(String[] files)
+	{
+		int arrlength =  files.length;
+        //Starts a merge sort
+        sort(files, 0, arrlength - 1);
+	}
+	
+	public static void showDirect()
+	{
+        String[] files;
+
+        File directory = new File(System.getProperty("user.dir"));
+
+        files = directory.list();
+        
+        sortFiles(files);
+    }
 	
 	public static void secondaryMenu()
 	{
@@ -30,6 +130,7 @@ public class virtualKey
 		}
 		else if(option.equals("4"))
 		{
+			System.out.println("\n");
 			mainMenu();
 		}
 		else
@@ -50,20 +151,23 @@ public class virtualKey
 		
 		if(option.equals("1"))
 		{
-			//place holder
+			System.out.println(" ");
 			System.out.println("Selected option 1");
+			showDirect();
 		}
 		else if(option.equals("2"))
 		{
-			//place holder
+			System.out.println(" ");
 			secondaryMenu();
 		}
 		else if(option.equals("3"))
 		{
 			System.out.println("Closing Application");
+			System.exit(0);
 		}
 		else
 		{
+			System.out.println(" ");
 			System.out.println(option + " is an invalid input. Try again. \n");
 			mainMenu();
 		}
