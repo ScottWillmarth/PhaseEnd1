@@ -34,6 +34,23 @@ public class virtualKey
 		secondaryMenu();
 	}
 	
+	public static void deleteFile()
+	{
+		System.out.println("What's the name of the file to be deleted?");
+		option =  sc.next();
+		
+		File removeFile = new File(option);  
+		if (removeFile.delete()) 
+		{ 
+		    System.out.println("Deleted the file: " + removeFile.getName());
+		} 
+		else 
+		{
+		    System.out.println("File not found \n");
+		} 
+		secondaryMenu();
+	}
+	
 	public static void printFiles(String[] files)
 	{
 		for (String file : files) 
@@ -147,8 +164,7 @@ public class virtualKey
 		}
 		else if(option.equals("2"))
 		{
-			//place holder
-			System.out.println("Selected option 2");
+			deleteFile();
 		}
 		else if(option.equals("3"))
 		{
