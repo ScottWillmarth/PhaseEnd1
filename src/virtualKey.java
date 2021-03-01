@@ -1,11 +1,38 @@
 import java.util.*; 
 import java.util.Scanner;
 import java.io.File;
+import java.io.IOException;
 
 public class virtualKey 
 {
 	static Scanner sc = new Scanner(System.in);
 	static String  option;
+	
+	public static void addFile()
+	{
+		System.out.println("Give the file a name");
+		option =  sc.next();
+		
+		try 
+		{
+		    File newFile = new File(option);  
+		    if (newFile.createNewFile()) 
+		    {  
+		      System.out.println("File created: " + newFile.getName());  
+		    } 
+		    else 
+		    {  
+		      System.out.println("File already exists, please try again \n");
+		      addFile();
+		    }  
+		} 
+		catch (IOException e) 
+		{
+		    System.out.println("An error occurred.");
+		    e.printStackTrace();  
+		}
+		secondaryMenu();
+	}
 	
 	public static void printFiles(String[] files)
 	{
@@ -116,8 +143,7 @@ public class virtualKey
 		
 		if(option.equals("1"))
 		{
-			//place holder
-			System.out.println("Selected option 1");
+			addFile();
 		}
 		else if(option.equals("2"))
 		{
