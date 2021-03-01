@@ -1,4 +1,3 @@
-import java.util.*; 
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -18,12 +17,12 @@ public class virtualKey
 		    File newFile = new File(option);  
 		    if (newFile.createNewFile()) 
 		    {  
-		      System.out.println("File created: " + newFile.getName());  
+		      System.out.println("File created: " + newFile.getName()); 
+		      System.out.println("");
 		    } 
 		    else 
 		    {  
-		      System.out.println("File already exists, please try again \n");
-		      addFile();
+		      System.out.println("FILE ALREADY EXISTS \n");
 		    }  
 		} 
 		catch (IOException e) 
@@ -43,11 +42,38 @@ public class virtualKey
 		if (removeFile.delete()) 
 		{ 
 		    System.out.println("Deleted the file: " + removeFile.getName());
+		    System.out.println("");
 		} 
 		else 
 		{
-		    System.out.println("File not found \n");
+		    System.out.println("FILE NOT FOUND \n");
 		} 
+		secondaryMenu();
+	}
+	
+	public static void searchFile()
+	{
+		boolean wasFound = false;
+		System.out.println("What's the name of the file you want to find?");
+		option =  sc.next();
+		
+		File directory = new File(System.getProperty("user.dir"));
+
+        String[] files = directory.list();
+        for(String f: files)
+        {
+        	if(f.equalsIgnoreCase(option))
+        	{
+        		System.out.println("FILE FOUND \n");
+        		wasFound = true;
+        		break;
+        	}
+        }
+		if(!wasFound)
+		{
+			System.out.println("FILE NOT FOUND \n");
+		}
+		
 		secondaryMenu();
 	}
 	
@@ -168,7 +194,7 @@ public class virtualKey
 		}
 		else if(option.equals("3"))
 		{
-			System.out.println("Selected option 3");
+			searchFile();
 		}
 		else if(option.equals("4"))
 		{
@@ -194,7 +220,6 @@ public class virtualKey
 		if(option.equals("1"))
 		{
 			System.out.println(" ");
-			System.out.println("Selected option 1");
 			showDirect();
 		}
 		else if(option.equals("2"))
